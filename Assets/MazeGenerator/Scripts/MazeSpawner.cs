@@ -8,7 +8,7 @@ public class MazeSpawner : MonoBehaviour {
         OldestTree,
         RecursiveDivision,
     }
-
+    
     public MazeGenerationAlgorithm Algorithm = MazeGenerationAlgorithm.PureRecursive;
     public bool FullRandom = false;
     public int RandomSeed = 12345;
@@ -22,7 +22,9 @@ public class MazeSpawner : MonoBehaviour {
     public bool AddGaps = true;
     public GameObject GoalPrefab = null;
 
+    private const int GoalLimit = 1;
     private BasicMazeGenerator mMazeGenerator = null;
+    //private NavMesh
 
     private void Start () {
         if (!FullRandom) {
@@ -70,6 +72,7 @@ public class MazeSpawner : MonoBehaviour {
                     tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0));
                     tmp.transform.parent = transform;
                 }
+                cell.IsGoal = cell.IsGoal && spawnedGoals < GoalLimit;
                 if (cell.IsGoal && GoalPrefab != null) {
                     ++spawnedGoals;
                     tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
@@ -77,6 +80,8 @@ public class MazeSpawner : MonoBehaviour {
                 }
             }
         }
+        Debug.Assert(spawnedGoals == 1);
+
         if (Pillar != null) {
             for (var row = 0; row <= Rows; ++row) {
                 for (int column = 0; column <= Columns; ++column) {

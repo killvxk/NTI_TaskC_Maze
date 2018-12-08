@@ -14,6 +14,7 @@ public class RollerBall : MonoBehaviour {
 	private Rigidbody mRigidBody = null;
 	private AudioSource mAudioSource = null;
 	private bool mFloorTouched = false;
+    public int Speed = 100;
 
 	void Start () {
 		mRigidBody = GetComponent<Rigidbody> ();
@@ -22,14 +23,18 @@ public class RollerBall : MonoBehaviour {
 
 	void FixedUpdate () {
 		if (mRigidBody != null) {
-			if (Input.GetButton ("Horizontal")) {
-				mRigidBody.AddTorque(Vector3.back * Input.GetAxis("Horizontal")*10);
-			}
-			if (Input.GetButton ("Vertical")) {
-				mRigidBody.AddTorque(Vector3.right * Input.GetAxis("Vertical")*10);
-			}
-		}
-		if (ViewCamera != null) {
+            var velocity = Vector3.zero;
+            if (Input.GetKey("d"))
+                velocity += Vector3.right * Time.deltaTime * Speed;
+            if (Input.GetKey("s"))
+                velocity += Vector3.back * Time.deltaTime * Speed;
+            if (Input.GetKey("a"))
+                velocity -= Vector3.right * Time.deltaTime * Speed;
+            if (Input.GetKey("w"))
+                velocity -= Vector3.back * Time.deltaTime * Speed;
+            mRigidBody.velocity = velocity;
+        }
+        if (ViewCamera != null) {
 			Vector3 direction = (Vector3.up*2+Vector3.back)*2;
 			RaycastHit hit;
 			Debug.DrawLine(transform.position,transform.position+direction,Color.red);
