@@ -55,24 +55,24 @@ public class MazeSpawner : MonoBehaviour {
                 var tmp = Instantiate(Floor, new Vector3(x, 0, z), Quaternion.Euler(0, 0, 0));
                 tmp.transform.parent = transform;
                 if (cell.WallRight) {
-                    tmp = Instantiate(Wall,new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0)) as GameObject;// right
+                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0));
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallFront) {
-                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;// front
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0));
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallLeft) {
-                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0)) as GameObject;// left
+                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0));
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallBack) {
-                    tmp = Instantiate(Wall,new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0));
                     tmp.transform.parent = transform;
                 }
                 if (cell.IsGoal && GoalPrefab != null) {
                     ++spawnedGoals;
-                    tmp = Instantiate(GoalPrefab,new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
+                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
                     tmp.transform.parent = transform;
                 }
             }
