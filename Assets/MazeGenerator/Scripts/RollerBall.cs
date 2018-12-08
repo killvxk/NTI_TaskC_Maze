@@ -28,12 +28,6 @@ public class RollerBall : MonoBehaviour {
 			if (Input.GetButton ("Vertical")) {
 				mRigidBody.AddTorque(Vector3.right * Input.GetAxis("Vertical")*10);
 			}
-			if (Input.GetButtonDown("Jump")) {
-				if(mAudioSource != null && JumpSound != null){
-					mAudioSource.PlayOneShot(JumpSound);
-				}
-				mRigidBody.AddForce(Vector3.up*200);
-			}
 		}
 		if (ViewCamera != null) {
 			Vector3 direction = (Vector3.up*2+Vector3.back)*2;
